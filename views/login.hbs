@@ -1,0 +1,17 @@
+<div class="jumbotron">
+    <h2>Example App: Login</h1>
+    <form action="/auth/login" method="POST">
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="eemail" name="email"> 
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <button type="submit" class="btn btn-secondary">Login</button>
+        {{#if message}}
+        <h4>{{message}}</h4>
+        {{/if}}
+    </form>
+</div>
