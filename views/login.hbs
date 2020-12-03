@@ -11,7 +11,11 @@
         </div>
         <button type="submit" class="btn btn-secondary">Login</button>
         {{#if message}}
-        <h4>{{message}}</h4>
+        <div class="jumbotron">
+            <div class="alert bg-secondary" role="alert">
+                <h5 class="card-title text-center text-white ">{{message}}</h5>
+            </div>
+        </div>
         {{/if}}
     </form>
 </div>

@@ -19,4 +19,11 @@
         </div>
         <button type="submit" class="btn btn-secondary">Register</button>
     </form>
+    {{#if message}}
+        <div class="jumbotron">
+            <div class="alert bg-secondary" role="alert">
+                <h5 class="card-title text-center text-white ">{{message}}</h5>
+            </div>
+        </div>
+    {{/if}}
 </div>
