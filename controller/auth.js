@@ -42,14 +42,16 @@ exports.login = (request, response) => {
         });
     }
     connection.query('SELECT * FROM users WHERE  email = ?', [email], async (error, results) => {
-        // if(!results.length || !(await bcrypt.compare(password, results[0].password))){
-        //     response.status(401).render('login', {
-        //         message: 'Email or Password incorrect'
-        //     }) 
-        // }
-        console.log(results, password)
-        })
-    }
+        if(!results.length || !(await bcrypt.compare(password, results[0].Password))){
+            return response.status(401).render('login', {
+                message: 'Email or Password incorrect'
+            }) 
+        } else {
+            return response.status(200).redirect('/')
+        }
+    })
+}
+
 exports.check = (request, response) => {
 
 }
