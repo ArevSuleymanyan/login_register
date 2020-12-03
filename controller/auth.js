@@ -29,21 +29,7 @@ exports.register = (request, response) => {
             })
         }
         userService.addUser(request, response)
-        // const hashedPassword = await bcrypt.hash(password, 8);
-        // const sql_insert = 'INSERT INTO users SET ?';
-
-        // userService.addUser()
-        // connection.query( sql_insert, { name, email, password: hashedPassword } , (error, results) => {
-        //     if(error){
-        //         console.log(error.message);
-        //         return;
-        //     } else {
-
-        //         return response.render('login', {
-        //             message: 'User registered'
-        //         })
-        //     }
-        // })
+     
     })
     
 }
@@ -55,9 +41,17 @@ exports.login = (request, response) => {
             message: 'Please provide an email and password'
         });
     }
-}
-
+    connection.query('SELECT * FROM users WHERE  email = ?', [email], async (error, results) => {
+        // if(!results.length || !(await bcrypt.compare(password, results[0].password))){
+        //     response.status(401).render('login', {
+        //         message: 'Email or Password incorrect'
+        //     }) 
+        // }
+        console.log(results, password)
+        })
+    }
 exports.check = (request, response) => {
+
 }
 
 

@@ -4,8 +4,6 @@ const bcrypt = require('bcryptjs');
 
 exports.addUser =  async (request, response ) => {
         const sql_insert = 'INSERT INTO users SET ?';
-        // const sql_insert1 = 'SELECT * FROM users';
-
         const {name, email, password } = request.body;
         const  hashedPassword = await bcrypt.hash(password, 8);
 
