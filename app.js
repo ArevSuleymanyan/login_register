@@ -3,9 +3,9 @@ const exp_hbs = require("express-handlebars");
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
-const userService = require("./services/userService");
-
 dotenv.config({path: './.env'})
+// const userService = require('./services/userService')
+// const { connection } = require("./db");
 
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser())
 
 const allow = [ 'auth/login', 'auth/register'];
-app.use( (request, response, next) => {
+app.use( async (request, response, next) => {
     const foundUrl = allow.find(el => new RegExp(`${el}\/?$`, 'gm').test(request.url));
     if(foundUrl){
         next();
@@ -25,11 +25,13 @@ app.use( (request, response, next) => {
     const {jwt: token} = request.cookies;
     if (!token) {
         response.status(404).render('login', {
-            message: 'Error'
+            message: 'Please log in again'
         });
         return;
     }
     const data = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(`DATA ID: ${data.id}`)
+
     if (!data) {
         response.status(404).render('login', {
             message: 'Error'
@@ -37,16 +39,18 @@ app.use( (request, response, next) => {
         return;
     }
 
-    // const user = await userService.getUserById(data.id)
-    // const user =  await userService.getUserById(data.id)
 
-    if (!user) {
-        response.status(404).render('login', {
-            message: 'Error'
-        });
-        return;
-    }
-    request.user = user;
+
+    //const userInfo = await userService.getUserById(data.id)
+    
+    // if (!user) {
+    //     response.status(404).render('login', {
+    //         message: 'Error'
+    //     });
+    //     return;
+    // }
+    // request.user = user;
+
     next();
 })
 

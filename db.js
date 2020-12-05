@@ -9,9 +9,9 @@ function createConnection(host, user, database, password){
     })
     connection.connect( (error)=>{
         if( error ){
-            console.log('Error: ' + error.message);
+            console.log('ERROR: ' + error);
         } else {
-            console.log('MySQL is connected');
+            console.log('MySQL is connected...');
         }
     })
     return connection;

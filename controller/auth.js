@@ -4,10 +4,11 @@ const jwt = require('jsonwebtoken')
 
 
 exports.register = (request, response) => {
+
     const { name, email, password, confirmPassword } = request.body;
     const sql_select = 'SELECT email FROM users WHERE email=?';
 
-    connection.query(sql_select, [email], async (error, results) => {
+    connection.query(sql_select, email, async (error, results) => {
         if(error){
             console.log(error.message);
             return;
@@ -27,8 +28,9 @@ exports.register = (request, response) => {
                 message: 'Passwords do not match'
             })
         }
+
         const sql_insert = 'INSERT INTO users SET ?';
-        const {name, email, password } = request.body;
+        // const {name, email, password } = request.body;
         const  hashedPassword = await bcrypt.hash(password, 8);
 
         connection.query(sql_insert, {name, email, password:hashedPassword } ,  (error, results) => {
@@ -56,17 +58,17 @@ exports.login = (request, response) => {
     }
     try {
         connection.query('SELECT * FROM users WHERE  email = ?', [email], async (error, results) => {
-            if(!results.length || !(await bcrypt.compare(password, results[0].Password))){
+            if(!results.length || !(await bcrypt.compare(password, results[0].password))){
                 return response.status(401).render('login', {
                     message: 'Email or Password incorrect'
                 }) 
             } else {
                 const id = results[0].Id;
-                console.log(id)
+                console.log(`ID: ${id}`)
                 const token = jwt.sign({ id }, process.env.JWT_SECRET, {
                     expiresIn: process.env.JWT_EXPIRES_IN
                 })
-                console.log(`token: ${token}`);
+                console.log(`TOKEN: ${token}`);
                 const cookieOptions = {
                     expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN *24 *60 *60),
                     httpOnly: true
@@ -82,8 +84,8 @@ exports.login = (request, response) => {
 
 
 
-exports.check = async (req, res) => {
-    return res.status(200);
+exports.check = async (request, response) => {
+    return response.status(200)
 }
 
 
