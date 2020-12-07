@@ -18,7 +18,7 @@ function createConnection(host, user, database, password){
     return connection;
 }
 const connection = createConnection(process.env.HOST, process.env.USER, process.env.DATABASE, process.env.PASSWORD);
-module.exports.connection.query = util.promisify(connection.query);
+// module.exports.connection.query = util.promisify(connection.query);
 module.exports.createConnection = createConnection;
 module.exports.connection = connection;
 
