@@ -37,7 +37,6 @@ exports.register = (request, response) => {
             if(error){
                 console.log(error.message);
             }else {
-                console.log(results)
                 return response.render('login', {
                     message: 'User registered'
                 })
@@ -70,7 +69,7 @@ exports.login = (request, response) => {
                 })
                 console.log(`TOKEN: ${token}`);
                 const cookieOptions = {
-                    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN *24 *60 *60),
+                    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60),
                     httpOnly: true
                 }
                 response.cookie('jwt', token, cookieOptions);
@@ -84,8 +83,7 @@ exports.login = (request, response) => {
 
 
 
-exports.check = async (request, response) => {
-    return response.status(200)
-}
-
+// exports.check =  (request, response) => {
+//     return response.status(200)
+// }
 
