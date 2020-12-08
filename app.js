@@ -17,9 +17,11 @@ const allow = [ 'auth/login', 'auth/register'];
 app.use( async (request, response, next) => {
     const foundUrl = allow.find(el => new RegExp(`${el}\/?$`, 'gm').test(request.url));
     if(foundUrl){
+        console.log('foundUrl: ', foundUrl)
         next();
         return;
     }
+   
 
     const {jwt: token} = request.cookies;
     if (!token) {
@@ -28,6 +30,8 @@ app.use( async (request, response, next) => {
         });
         return;
     }
+    
+    console.log('token:', token)
 
     const data = jwt.verify(token, process.env.JWT_SECRET);
     if (!data) {
@@ -36,6 +40,7 @@ app.use( async (request, response, next) => {
         });
         return;
     }
+    console.log('data:', data)
 
     const user = new UserService();
     const userInfo =   await user.getUserById(data.id);
@@ -46,7 +51,7 @@ app.use( async (request, response, next) => {
         });
         return;
     }
-    
+    console.log('userInfo:', userInfo)
     request.userInfo = userInfo;
     next();
     
