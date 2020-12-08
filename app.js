@@ -20,6 +20,7 @@ app.use( async (request, response, next) => {
         next();
         return
     }
+
     const {jwt: token} = request.cookies;
     if (!token) {
         response.status(404).render('login', {
@@ -27,6 +28,7 @@ app.use( async (request, response, next) => {
         });
         return;
     }
+
     const data = jwt.verify(token, process.env.JWT_SECRET);
     if (!data) {
         response.status(404).render('login', {
@@ -34,6 +36,7 @@ app.use( async (request, response, next) => {
         });
         return;
     }
+
     const user = new UserService();
     const userInfo =   await user.getUserById(data.id);
     console.log(`APP USERINFO:`,userInfo);
@@ -44,16 +47,19 @@ app.use( async (request, response, next) => {
         });
         return;
     }
+    
     request.userInfo = userInfo;
     next();
+
+
 })
 
 
-
+//view
 app.engine('.hbs', exp_hbs({extname: '.hbs'}));
 app.set('view engine', 'hbs');
 
-
+//router
 app.use("/", require("./routes/pages")); 
 app.use('/auth', require('./routes/auth'))
 

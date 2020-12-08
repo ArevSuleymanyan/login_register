@@ -3,8 +3,10 @@ const router = express.Router();
 
 router.get("/", (request, response) => {
     if(request.userInfo){
+        let userName = request.userInfo.name;
+        userName = userName.charAt(0).toUpperCase() + userName.slice(1)
         response.render("home", {
-            name: `${request.userInfo.name}`
+            name: `${userName}`
         })
     }else{
         response.render("home", {
