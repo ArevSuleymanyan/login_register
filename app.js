@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cookieParser())
 
 const allow = [ 'auth/login', 'auth/register'];
-app.use(async (request, response, next) => {
+app.use( async (request, response, next) => {
     const foundUrl = allow.find(el => new RegExp(`${el}\/?$`, 'gm').test(request.url));
     if(foundUrl){
         next();
@@ -36,16 +36,18 @@ app.use(async (request, response, next) => {
     }
     const user = new UserService();
     const userInfo =   await user.getUserById(data.id);
-
-    // if (!userInfo) {
-    //     response.status(404).render('login', {
-    //         message: 'Error'
-    //     });
-    //     return;
-    // }
-    // request.userInfo = userInfo;
+    console.log(`APP USERINFO:`,userInfo);
+    
+    if (!userInfo) {
+        response.status(404).render('login', {
+            message: 'Error'
+        });
+        return;
+    }
+    request.userInfo = userInfo;
     next();
 })
+
 
 
 app.engine('.hbs', exp_hbs({extname: '.hbs'}));

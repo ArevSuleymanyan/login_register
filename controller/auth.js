@@ -83,7 +83,5 @@ exports.login = (request, response) => {
 
 
 
-// exports.check =  (request, response) => {
-//     return response.status(200)
-// }
+
 
