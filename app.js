@@ -18,7 +18,7 @@ app.use( async (request, response, next) => {
     const foundUrl = allow.find(el => new RegExp(`${el}\/?$`, 'gm').test(request.url));
     if(foundUrl){
         next();
-        return
+        return;
     }
 
     const {jwt: token} = request.cookies;
@@ -31,7 +31,7 @@ app.use( async (request, response, next) => {
 
     const data = jwt.verify(token, process.env.JWT_SECRET);
     if (!data) {
-        response.status(404).render('login', {
+        response.status(404).render('register', {
             message: 'Error'
         });
         return;
@@ -39,7 +39,6 @@ app.use( async (request, response, next) => {
 
     const user = new UserService();
     const userInfo =   await user.getUserById(data.id);
-    console.log(`APP USERINFO:`,userInfo);
     
     if (!userInfo) {
         response.status(404).render('login', {
@@ -50,7 +49,7 @@ app.use( async (request, response, next) => {
     
     request.userInfo = userInfo;
     next();
-
+    
 
 })
 

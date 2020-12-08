@@ -27,6 +27,8 @@ router.get("/register", (request, response) => {
     })
 })
 
+
+
 router.get('/logout', (request, response) => {
     response.clearCookie("jwt");
     response.redirect('/')
