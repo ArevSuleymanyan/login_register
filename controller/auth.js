@@ -48,6 +48,7 @@ exports.register = (request, response) => {
 
 
 exports.login = (request, response) => {
+    
     const { email, password } = (request.body || {} );
     if( !email || !password ){
         return response.status(400).render('login', {
@@ -77,6 +78,7 @@ exports.login = (request, response) => {
         console.log(error)
     }
 }
+
 
 
 

@@ -6,7 +6,8 @@ router.get("/", (request, response) => {
         let userName = request.userInfo.name;
         userName = userName.charAt(0).toUpperCase() + userName.slice(1)
         response.render("home", {
-            name: `${userName}`
+            name: `${userName}`,
+            title: 'Profile'
         })
     }else{
         response.render("home", {
