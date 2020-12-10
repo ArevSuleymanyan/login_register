@@ -7,7 +7,7 @@ router.get("/", (request, response) => {
         userName = userName.charAt(0).toUpperCase() + userName.slice(1)
         response.render("home", {
             name: `${userName}`,
-            title: 'Profile'
+            title: `Welcome ${userName}`
         })
     }else{
         response.render("home", {
@@ -34,5 +34,16 @@ router.get('/logout', (request, response) => {
     response.clearCookie("jwt");
     response.redirect('/')
 })
+
+router.get('/profile', (request, response) => {
+    console.log(request.userInfo)
+    const email = request.userInfo.email;
+    response.render("profile", {
+        name: ' ',
+        email: email,
+        title: "Profile"
+    })
+})
+
 
 module.exports = router

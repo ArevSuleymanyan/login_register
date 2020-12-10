@@ -71,6 +71,8 @@ exports.login = (request, response) => {
                     httpOnly: true
                 }
                 response.cookie('jwt', token, cookieOptions);
+                // console.log('RESULTS: ' , results[0] );
+                // console.log('UserInfo: ' , request.userInfo)
                 return response.status(200).redirect('/')
             }
         })

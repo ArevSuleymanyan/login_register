@@ -14,27 +14,28 @@ app.use(express.json());
 app.use(cookieParser())
 
 
-const allow = [ 'auth/login', 'auth/register'];
+const allow = ['register', 'login', 'auth/login', 'auth/register'];
 app.use( async (request, response, next) => {
+   
     const foundUrl = allow.find(el => new RegExp(`${el}\/?$`, 'gm').test(request.url));
     if(foundUrl){
         next();
         return;
     }
-   
 
     const {jwt: token} = request.cookies;
     if (!token) {
-        response.status(404).render('login', {
-            message: 'Error'
+        response.status(404).render('error', {
+            message: 'Please log in'
         });
         return;
     }
     
 
     const data = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('DATA: ', data)
     if (!data) {
-        response.status(404).render('register', {
+        response.status(404).render('error', {
             message: 'Error'
         });
         return;
