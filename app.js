@@ -33,7 +33,6 @@ app.use( async (request, response, next) => {
     
 
     const data = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('DATA: ', data)
     if (!data) {
         response.status(404).render('error', {
             message: 'Error',

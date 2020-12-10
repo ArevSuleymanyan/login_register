@@ -44,5 +44,11 @@ router.get('/profile', (request, response) => {
     })
 })
 
+// router.get("/game", (request, response) => {
+//     response.render("game", {
+//         title: "Game",
+//     })
+// })
+
 
 module.exports = router;
