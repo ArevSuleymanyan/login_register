@@ -1,14 +1,14 @@
 const mysql = require("mysql");
 
-function createConnection(host, user, database, password){
+function createConnection(host, user, database, password) {
     const connection = mysql.createConnection({
         host,
         user,
         database,
         password,
     })
-    connection.connect( (error)=>{
-        if( error ){
+    connection.connect( (error) => {
+        if( error ) {
             console.log('ERROR: ' + error);
         } else {
             console.log('MySQL is connected...');

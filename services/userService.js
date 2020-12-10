@@ -6,10 +6,10 @@ class UserService {
         const sql = `SELECT * FROM users WHERE Id =${userId}`;
         return new Promise((resolve, reject) => {
             connection.query(sql, (error, results) => {
-                if(error){
-                    reject(error)
+                if(error) {
+                    reject(error);
                 } else {
-                    resolve(results[0])
+                    resolve(results[0]);
                 }
             })
         })
