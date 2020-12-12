@@ -1,5 +1,5 @@
 const { connection } = require("../db");
-const SudokuLogic = require("../game/sudoku");
+const SudokuLogic = require("../game/SudokuLogic");
 
 class UserService {
 
