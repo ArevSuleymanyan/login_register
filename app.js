@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 dotenv.config({path: './.env'});
-const UserService = require('./services/Service');
+const UserService = require('./services/UserService');
 
 const app = express();
 const port = process.env.PORT || 3000;
