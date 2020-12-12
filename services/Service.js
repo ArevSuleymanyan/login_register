@@ -24,6 +24,7 @@ class UserService {
         for(let i = 0; i < board.length; i++){
             sudokuBoard.push(board[i].number);
         }
+        console.log(sudokuBoard)
         const json = JSON.stringify(sudokuBoard);
         connection.query(sql, [json], (error, results) => {
             if(error){
