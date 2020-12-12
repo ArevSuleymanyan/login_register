@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const UserService = require('../services/UserService');
+
+const userService = new UserService()
 
 router.get("/", (request, response) => {
     if(request.userInfo) {
@@ -44,11 +47,18 @@ router.get('/profile', (request, response) => {
     })
 })
 
-// router.get("/game", (request, response) => {
-//     response.render("game", {
-//         title: "Game",
-//     })
-// })
+router.get("/game", async (request, response) => {
+    if(request.userInfo){
+        const id = request.userInfo.Id
+        const sql = `INSERT game(user_id, sudoku) VALUES (${id}, ?)`
+        userService.insertGameInDb(sql);
+        const gameInfo = await userService.getGameById(id);
+        
+        response.json(`${gameInfo.sudoku}`)
+    }else{
+        response.send('error')
+    }
+})
 
 
 module.exports = router;
