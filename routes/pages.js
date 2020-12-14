@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const UserService = require('../services/UserService');
+const GameService = require('../services/GameService');
 
-const userService = new UserService();
+// const userService = new UserService();
+const gameService = new GameService();
 
 router.get('/', (request, response) => {
   if (request.userInfo) {
@@ -38,11 +40,11 @@ router.get('/logout', (request, response) => {
 
 router.get('/play', async (request, response) => {
     const id = request.userInfo.Id;
-    let game = await userService.getGameById(id);
+    let game = await gameService.getGameById(id);
     if (!game) {
-      const board = userService.getNewGame();
-      userService.insertNewGame(id, board);
-      let game = await userService.getGameById(id);
+      const board = gameService.getNewGame();
+      gameService.insertNewGame(id, board);
+      let game = await gameService.getGameById(id);
       response.json(game.sudoku);
     } else {
       response.json(game.sudoku);
@@ -53,16 +55,16 @@ router.get('/play', async (request, response) => {
 router.get('/game', async (request, response) => {
   
     const id = request.userInfo.Id;
-    let game = await userService.getGameById(id);
+    let game = await gameService.getGameById(id);
     if (!game) {
-      let board = userService.getNewGame();
-      userService.insertNewGame(id, board);
-      let game = await userService.getGameById(id);
+      let board = gameService.getNewGame();
+      gameService.insertNewGame(id, board);
+      let game = await gameService.getGameById(id);
       response.json(game.sudoku);
     } else {
-      let board = userService.getNewGame();
-     await userService.updateGame(id, board);
-      let game = await userService.getGameById(id);
+      let board = gameService.getNewGame();
+     await gameService.updateGame(id, board);
+      let game = await gameService.getGameById(id);
       response.json(game.sudoku);
     }
  
