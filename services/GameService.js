@@ -1,5 +1,7 @@
 const { connection } = require('../db');
 const SudokuLogic = require('../model/SudokuLogic');
+const util = require('util');
+const queryPromisify = util.promisify(connection.query).bind(connection);
 
 class GameService{
     getNewGame() {
@@ -15,16 +17,11 @@ class GameService{
       
       getGameById(id) {
         const sql = `SELECT * FROM game WHERE user_id=${id}`;
-        return new Promise((resolve, reject) => {
-          connection.query(sql, (error, results) => {
-            if (error) {
-              reject(error);
-            } else {
-              resolve(results[0]);
-            }
-          });
-        });
+        return queryPromisify(sql)
+        .then(result => result[0])
+        .catch(error => console.log('error from  getGameById:', error))
       }
+      
       insertNewGame(id, board) {
         const json = JSON.stringify(board);
         const sql = `INSERT game(user_id, sudoku) VALUES (${id}, ?)`;
