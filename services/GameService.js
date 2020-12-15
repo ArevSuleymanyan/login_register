@@ -26,7 +26,7 @@ class GameService {
     const json = JSON.stringify(board);
     const sql = `INSERT game(user_id, sudoku) VALUES (${id}, ?)`;
     return queryPromisify(sql,[json])
-      .then((result) => console.log('insert new game in db'))
+      .then(() => console.log('insert new game in db'))
       .catch((error) => console.log('Error from insertNewGame:', error));
 
   }
@@ -35,7 +35,7 @@ class GameService {
     const json = JSON.stringify(board);
     const sql = `UPDATE game SET sudoku = ? WHERE user_id=${id}`;
     return queryPromisify(sql,[json])
-      .then((result) => console.log('game is update'))
+      .then(() => console.log('game is update'))
       .catch((error) => console.log('Error from updateGame:', error));
   }
 }
