@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const UserService = require('../services/UserService');
 const GameService = require('../services/GameService');
 
-// const userService = new UserService();
 const gameService = new GameService();
 
 router.get('/', (request, response) => {
@@ -38,36 +36,33 @@ router.get('/logout', (request, response) => {
   response.redirect('/');
 });
 
-router.get('/play', async (request, response) => {
-    const id = request.userInfo.Id;
-    let game = await gameService.getGameById(id);
-    if (!game) {
-      const board = gameService.getNewGame();
-      gameService.insertNewGame(id, board);
-      let game = await gameService.getGameById(id);
-      response.json(game.sudoku);
-    } else {
-      response.json(game.sudoku);
-    }
+// router.get('/play', async (request, response) => {
+//     const id = request.userInfo.Id;
+//     let game = await gameService.getGameById(id);
+//     if (!game) {
+//       const board = gameService.getNewGame();
+//       gameService.insertNewGame(id, board);
+//       let game = await gameService.getGameById(id);
+//       response.json(game.sudoku);
+//     } else {
+//       response.json(game.sudoku);
+//     }
+// });
 
-});
-
-router.get('/game', async (request, response) => {
-  
-    const id = request.userInfo.Id;
-    let game = await gameService.getGameById(id);
-    if (!game) {
-      let board = gameService.getNewGame();
-      gameService.insertNewGame(id, board);
-      let game = await gameService.getGameById(id);
-      response.json(game.sudoku);
-    } else {
-      let board = gameService.getNewGame();
-     await gameService.updateGame(id, board);
-      let game = await gameService.getGameById(id);
-      response.json(game.sudoku);
-    }
- 
-});
+// router.get('/game', async (request, response) => {
+//     const id = request.userInfo.Id;
+//     let game = await gameService.getGameById(id);
+//     if (!game) {
+//       let board = gameService.getNewGame();
+//       gameService.insertNewGame(id, board);
+//       let game = await gameService.getGameById(id);
+//       response.json(game.sudoku);
+//     } else {
+//       let board = gameService.getNewGame();
+//      await gameService.updateGame(id, board);
+//       let game = await gameService.getGameById(id);
+//       response.json(game.sudoku);
+//     }
+// });
 
 module.exports = router;

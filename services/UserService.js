@@ -1,5 +1,7 @@
 const { connection } = require('../db');
 const SudokuLogic = require('../model/SudokuLogic');
+const util = require('util');
+
 class UserService {
   getUserById(userId) {
     const sql = `SELECT * FROM users WHERE Id =${userId}`;
@@ -13,7 +15,5 @@ class UserService {
       });
     });
   }
-
-  
 }
 module.exports = UserService;

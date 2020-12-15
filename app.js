@@ -60,6 +60,7 @@ app.set('view engine', 'hbs');
 //router
 app.use("/", require("./routes/pages")); 
 app.use('/auth', require('./routes/auth'));
+app.use('/game', require('./routes/game'));
 
 app.listen( port, () => {
     console.log(`Server started on port ${port}`);

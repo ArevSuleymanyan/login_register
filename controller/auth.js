@@ -78,9 +78,3 @@ exports.login = (request, response) => {
         console.log(`Error: ${error.message}`);
     }
 }
-
-
-
-
-
-

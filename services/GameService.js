@@ -12,6 +12,7 @@ class GameService{
         }
         return sudokuBoard;
       }
+      
       getGameById(id) {
         const sql = `SELECT * FROM game WHERE user_id=${id}`;
         return new Promise((resolve, reject) => {
