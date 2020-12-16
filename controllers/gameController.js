@@ -1,4 +1,3 @@
-// const { connection } = require('../db');
 const GameService = require('../services/GameService');
 const gameService = new GameService();
 
@@ -6,6 +5,7 @@ exports.newgame = async (request, response) => {
   const id = request.userInfo.Id;
   let game = await gameService.getGameById(id);
   let board = gameService.getNewGame();
+
   if (!game) {
     await gameService.insertNewGame(id, board);
   } else {
@@ -24,10 +24,7 @@ exports.play = async (request, response) => {
     gameService.insertNewGame(id, board);
     let game = await gameService.getGameById(id);
     response.json(game.sudoku);
-  } else {
-    let sudokuBoard = JSON.parse(game.sudoku);
-    console.log(sudokuBoard);
-
-    response.json(sudokuBoard);
+    return;
   }
+  response.json(game.sudoku);
 };

@@ -1,6 +1,5 @@
 const { connection } = require('../db');
 const SudokuLogic = require('../models/SudokuLogic');
-
 const { queryAsync } = connection;
 
 class GameService {
