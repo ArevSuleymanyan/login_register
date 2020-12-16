@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const util = require('util');
 
 function createConnection(host, user, database, password) {
   const connection = mysql.createConnection({
@@ -22,5 +23,7 @@ const connection = createConnection(
   process.env.DATABASE,
   process.env.PASSWORD
 );
+connection.queryAsync = util.promisify(connection.query).bind(connection);
+
 module.exports.createConnection = createConnection;
 module.exports.connection = connection;

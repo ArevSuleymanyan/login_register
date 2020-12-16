@@ -1,7 +1,7 @@
 const { connection } = require('../db');
-const SudokuLogic = require('../model/SudokuLogic');
-const util = require('util');
-const queryPromisify = util.promisify(connection.query).bind(connection);
+const SudokuLogic = require('../models/SudokuLogic');
+
+const { queryAsync } = connection;
 
 class GameService {
   getNewGame() {
@@ -17,7 +17,7 @@ class GameService {
 
   getGameById(id) {
     const sql = `SELECT * FROM game WHERE user_id=${id}`;
-    return queryPromisify(sql)
+    return queryAsync(sql)
       .then((result) => result[0])
       .catch((error) => console.log('error from  getGameById:', error));
   }
@@ -25,16 +25,15 @@ class GameService {
   insertNewGame(id, board) {
     const json = JSON.stringify(board);
     const sql = `INSERT game(user_id, sudoku) VALUES (${id}, ?)`;
-    return queryPromisify(sql,[json])
+    return queryAsync(sql, [json])
       .then(() => console.log('insert new game in db'))
       .catch((error) => console.log('Error from insertNewGame:', error));
-
   }
 
   updateGame(id, board) {
     const json = JSON.stringify(board);
     const sql = `UPDATE game SET sudoku = ? WHERE user_id=${id}`;
-    return queryPromisify(sql,[json])
+    return queryAsync(sql, [json])
       .then(() => console.log('game is update'))
       .catch((error) => console.log('Error from updateGame:', error));
   }
