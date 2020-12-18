@@ -1,4 +1,3 @@
-const { connection } = require('../db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const UserService = require('../services/UserService');
@@ -28,7 +27,7 @@ exports.register = async (request, response) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 8);
-    userService.insertUserInDb(name, email, hashedPassword);
+    await userService.insertUserInDb(name, email, hashedPassword);
     response.render('login', {
         message: 'User registered',
     });
@@ -64,5 +63,4 @@ exports.login = async (request, response) => {
         response.cookie('jwt', token, cookieOptions);
         return response.status(200).redirect('/');
     }
-
 };

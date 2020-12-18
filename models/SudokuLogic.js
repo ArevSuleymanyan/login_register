@@ -1,89 +1,89 @@
 class SudokuLogic {
-    constructor(){
+    constructor() {
         this.resetData();
     }
 
     resetData() {
         this.board = [];
-        for(let i = 0; i < 81; i++){
+        for (let i = 0; i < 81; i++) {
             let x = i % 9;
-            let y = parseInt(i/9)
+            let y = parseInt(i / 9);
             this.board.push({
                 x,
                 y,
-                number: 0
-            })
+                number: 0,
+            });
         }
     }
 
-    runGame(lvl = 3){
-        this.getNumberByLevel(lvl) ;
+    runGame(lvl = 3) {
+        this.getNumberByLevel(lvl);
     }
 
-    updateBoard(input, i, j){
-        let index = j * 9 + i ;
-        if(this.check(input, i, j)){
+    updateBoard(input, i, j) {
+        let index = j * 9 + i;
+        if (this.check(input, i, j)) {
             this.board[index].number = input;
         }
     }
 
-    checkEndGame(){
-        for(let item of this.board){
-            if(!item.number){
-                return true
+    checkEndGame() {
+        for (let item of this.board) {
+            if (!item.number) {
+                return true;
             }
         }
-        return false
+        return false;
     }
 
-    getNumberByLevel(level){
+    getNumberByLevel(level) {
         let countOfNumbers;
-        if(level === 3){
+        if (level === 3) {
             countOfNumbers = 40;
             this.generateNumber();
-        }else if(level === 2){
+        } else if (level === 2) {
             countOfNumbers = 30;
             this.generateNumber();
-        }else if(level === 1) {
+        } else if (level === 1) {
             countOfNumbers = 25;
             this.generateNumber();
         }
-    
-        while(countOfNumbers < 81 ){
-            let randomIndex = Math.floor(Math.random()*81);
-            if(this.board[randomIndex].number){
+
+        while (countOfNumbers < 81) {
+            let randomIndex = Math.floor(Math.random() * 81);
+            if (this.board[randomIndex].number) {
                 this.board[randomIndex].number = 0;
-                countOfNumbers++
+                countOfNumbers++;
             }
         }
     }
 
-    possibleNumbers(index){
-        let init = [1,2,3,4,5,6,7,8,9];
+    possibleNumbers(index) {
+        let init = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         let possible = [];
-        for(let item of init){
-            if(this.check(item, this.board[index].x, this.board[index].y)) {
+        for (let item of init) {
+            if (this.check(item, this.board[index].x, this.board[index].y)) {
                 possible.push(item);
             }
         }
-        return possible
+        return possible;
     }
 
-    generateNumber (attempts){
+    generateNumber(attempts) {
         if (!attempts) {
             attempts = 2000;
         }
-        this.resetData()
-        for(let i = 0; i < 81; i++){
+        this.resetData();
+        for (let i = 0; i < 81; i++) {
             let possible = this.possibleNumbers(i);
             if (!possible.length) {
                 this.resetData();
                 i = -1;
-                attempts --;
+                attempts--;
                 if (attempts == 0) {
-                    throw "Cant generate"
+                    throw 'Cant generate';
                 }
-                continue
+                continue;
             }
             let rnd = Math.floor(Math.random() * possible.length);
             this.board[i].number = possible[rnd];
@@ -91,42 +91,48 @@ class SudokuLogic {
         }
     }
 
-
-    check(number, i, j){
-        if(this.checkVertical(number, i) && this.checkHorizontal(number, j) && this.checkMatrix(number, i, j)){
-            return true
-        }else {
-            return false
-        } 
+    check(number, i, j) {
+        if (
+            this.checkVertical(number, i) &&
+            this.checkHorizontal(number, j) &&
+            this.checkMatrix(number, i, j)
+        ) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    
-    checkVertical(number, i){
-        for(let item of this.board){
-            if(item.x === i && item.number === number){
-                    return false;
+
+    checkVertical(number, i) {
+        for (let item of this.board) {
+            if (item.x === i && item.number === number) {
+                return false;
             }
         }
         return true;
     }
 
-    checkHorizontal(number, j){
-        for(let item of this.board){
-            if(item.y === j && item.number === number){
-                    return false;
+    checkHorizontal(number, j) {
+        for (let item of this.board) {
+            if (item.y === j && item.number === number) {
+                return false;
             }
         }
         return true;
     }
 
-    
-    checkMatrix(number, i, j){
-        let segmentX = parseInt(i / 3)*3;
-        let segmentY = parseInt(j / 3)*3;
-        for(let item of this.board){
-            for(let k = segmentX; k < segmentX + 3; k++){
-                for(let p = segmentY; p < segmentY + 3; p++){
-                    if(item.x === k && item.y === p && item.number === number){
-                    return false
+    checkMatrix(number, i, j) {
+        let segmentX = parseInt(i / 3) * 3;
+        let segmentY = parseInt(j / 3) * 3;
+        for (let item of this.board) {
+            for (let k = segmentX; k < segmentX + 3; k++) {
+                for (let p = segmentY; p < segmentY + 3; p++) {
+                    if (
+                        item.x === k &&
+                        item.y === p &&
+                        item.number === number
+                    ) {
+                        return false;
                     }
                 }
             }
@@ -135,17 +141,16 @@ class SudokuLogic {
     }
 
     print() {
-        let res = "";
-        for(let i = 0; i < 81; i++){
+        let res = '';
+        for (let i = 0; i < 81; i++) {
             const item = this.board[i];
-            if(i % 9 === 0){
-                res += '\n'
+            if (i % 9 === 0) {
+                res += '\n';
             }
             res += item.number.toString();
         }
         console.log(res);
     }
-}   
+}
 
- module.exports = SudokuLogic;
-
+module.exports = SudokuLogic;
