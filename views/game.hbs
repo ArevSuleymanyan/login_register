@@ -7,10 +7,18 @@
             border: 1px solid grey;
             padding: 5px 15px;
         }
+        .zero{
+            color: rgba(240, 248, 255, 0);
+        }
     </style>
 <div id="root"></div>
 </div>
 <script >
+    fetch('http://localhost:3000/api/board')
+    .then(res => console.log(res.json()))
+    .then(json => json)
+    .catch(err => console.log(err.message))
+
     let board = {{game}}
     let root = document.getElementById('root');
     let n = 0
@@ -21,11 +29,14 @@
             let divColumn = document.createElement('div');
             divColumn.classList.add('column');
             divColumn.innerHTML = board[n];
+            divColumn.setAttribute('id', n)
+            if(!board[n]){
+                divColumn.classList.add('zero');
+            }
             divRow.append(divColumn)
             n++
         }
     root.append(divRow)
     }
-
+    console.log('game')
 </script>
-{{!-- <div>{{game}}</div> --}}
