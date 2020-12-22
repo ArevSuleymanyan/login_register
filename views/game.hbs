@@ -1,9 +1,31 @@
-{{!-- 
-<script id="game-template"  type="text/x-handlebars-template">
-    <div class="jumbotron">
+<div class="jumbotron">
+    <style>
+        .column{
+            font-size: 24px;
+            font-weight: bold;
+            color: dimgray;
+            border: 1px solid grey;
+            padding: 5px 15px;
+        }
+    </style>
+<div id="root"></div>
+</div>
+<script >
+    let board = {{game}}
+    let root = document.getElementById('root');
+    let n = 0
+    for(let i = 0; i < 9; i++ ){
+        let divRow = document.createElement('div');
+        divRow.classList.add('row')
+        for(let i = 0; i < 9; i++ ){
+            let divColumn = document.createElement('div');
+            divColumn.classList.add('column');
+            divColumn.innerHTML = board[n];
+            divRow.append(divColumn)
+            n++
+        }
+    root.append(divRow)
+    }
 
-    </div>
 </script>
-
-    --}}
-               
+{{!-- <div>{{game}}</div> --}}

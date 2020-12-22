@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 dotenv.config({ path: './.env' });
 const UserService = require('./services/UserService');
+const { response } = require('express');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -61,6 +62,10 @@ app.set('view engine', 'hbs');
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
 app.use('/game', require('./routes/game'));
+app.use('/api', require('./routes/api'));
+
+
+
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
