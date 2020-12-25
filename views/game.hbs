@@ -7,17 +7,31 @@
             border: 1px solid grey;
             padding: 5px 15px;
         }
-        .zero{
-            color: rgba(240, 248, 255, 0);
+        
+        #possible{
+            margin-bottom: 20px;
         }
-    </style>
-<div id="root"></div>
+        .possNumber{
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            color: dimgray;
+            border: 1px solid grey;
+            padding: 5px 15px;
+        }
+        #root{
+            margin-left: 15px;
+        }
+    </style> 
+    <div id="possible"></div>
+    <div id="root"></div>
 </div>
-<script >
-    fetch('http://localhost:3000/api/board')
-    .then(res => console.log(res.json()))
-    .then(json => json)
-    .catch(err => console.log(err.message))
+
+ <script >
+    //fetch('http://localhost:3000/api/board')
+    //.then(res => console.log(res.json()))
+    //.then(json => json)
+    //.catch(err => console.log(err.message))
 
     let board = {{game}}
     let root = document.getElementById('root');
@@ -30,13 +44,17 @@
             divColumn.classList.add('column');
             divColumn.innerHTML = board[n];
             divColumn.setAttribute('id', n)
-            if(!board[n]){
-                divColumn.classList.add('zero');
-            }
             divRow.append(divColumn)
             n++
         }
     root.append(divRow)
     }
-    console.log('game')
+    let possible = document.getElementById('possible');
+    for(let i = 0; i < 9 ; i++){
+        let divPoss = document.createElement('div');
+        divPoss.classList.add('possNumber');
+        divPoss.innerHTML = 0
+        possible.append(divPoss)
+    }
+    
 </script>
