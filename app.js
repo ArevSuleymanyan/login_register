@@ -2,6 +2,7 @@ const express = require('express');
 const exp_hbs = require('express-handlebars');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 dotenv.config({ path: './.env' });
 const UserService = require('./services/UserService');
@@ -9,10 +10,13 @@ const UserService = require('./services/UserService');
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(express.static(__dirname + '/public'));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}))
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const allow = ['register', 'login', 'auth/login', 'auth/register'];
