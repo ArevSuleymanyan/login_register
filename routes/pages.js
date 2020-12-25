@@ -1,5 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const gameRoute = require('../routes/game');
+const apiRoute = require('../routes/api');
+const authRoute = require('../routes/auth');
+
 
 router.get('/', (request, response) => {
     if (request.userInfo) {
@@ -32,5 +36,9 @@ router.get('/logout', (request, response) => {
     response.clearCookie('jwt');
     response.redirect('/');
 });
+
+router.use('/game', gameRoute);
+router.use('/api', apiRoute);
+router.use('/auth', authRoute);
 
 module.exports = router;

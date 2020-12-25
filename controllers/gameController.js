@@ -29,13 +29,13 @@ exports.play = async (request, response) => {
         const board = gameService.getNewGame();
         gameService.insertNewGame(id, board);
         let game = await gameService.getGameById(id);
-        response.render('game', {
+        response.render('game_test', {
             name,
             game: game.sudoku,
         });
     }
     // response.json(game.sudoku);
-    response.render('game', {
+    response.render('game_test', {
         name,
         game: game.sudoku,
     });

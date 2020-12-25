@@ -33,7 +33,7 @@ class GameService {
         const json = JSON.stringify(board);
         const sql = `UPDATE game SET sudoku = ? WHERE user_id=${id}`;
         return queryAsync(sql, [json])
-            .then(() => console.log('game is update'))
+            .then(() => console.log('update'))
             .catch((error) => console.log('Error from updateGame:', error));
     }
 }
