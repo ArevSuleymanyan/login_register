@@ -5,5 +5,5 @@ item.innerHTML = 'click'
 item.addEventListener('click', (event) => clickMe(event))
 
 clickMe = (event) => {
-    alert('hello')
+    alert('hello world')
 }
