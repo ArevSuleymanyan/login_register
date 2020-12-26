@@ -1,0 +1,35 @@
+#root {
+    margin-left: 15px;
+    margin-top: 20px;
+}
+#possible {
+    margin-bottom: 20px;
+}
+
+.column , .poss{
+    text-align: center;
+    display: inline-block;
+    border: 1px gray solid;
+    width: 40px;
+    height: 40px;
+    margin: 1px;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 3px;
+}
+.start {
+    color: grey;
+}
+
+.marked {
+    background-color: rgba(214, 211, 211, 0.972);
+}
+
+.selected {
+    font-size: 22px;
+    background-color: rgba(152, 154, 155, 0.637);
+}
+
+.alert {
+    margin-left: -15px;
+}

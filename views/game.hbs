@@ -1,60 +1,6 @@
 <div class="jumbotron">
-    <style>
-        .column{
-            font-size: 24px;
-            font-weight: bold;
-            color: dimgray;
-            border: 1px solid grey;
-            padding: 5px 15px;
-        }
-        
-        #possible{
-            margin-bottom: 20px;
-        }
-        .possNumber{
-            display: inline-block;
-            font-size: 24px;
-            font-weight: bold;
-            color: dimgray;
-            border: 1px solid grey;
-            padding: 5px 15px;
-        }
-        #root{
-            margin-left: 15px;
-        }
-    </style> 
     <div id="possible"></div>
+    <button class="btn btn-light" id="add">Add</button>
+    <button class="btn btn-light " id="delete">Delete</button>
     <div id="root"></div>
 </div>
-
- <script >
-    //fetch('http://localhost:3000/api/board')
-    //.then(res => console.log(res.json()))
-    //.then(json => json)
-    //.catch(err => console.log(err.message))
-
-    let board = {{game}}
-    let root = document.getElementById('root');
-    let n = 0
-    for(let i = 0; i < 9; i++ ){
-        let divRow = document.createElement('div');
-        divRow.classList.add('row')
-        for(let i = 0; i < 9; i++ ){
-            let divColumn = document.createElement('div');
-            divColumn.classList.add('column');
-            divColumn.innerHTML = board[n];
-            divColumn.setAttribute('id', n)
-            divRow.append(divColumn)
-            n++
-        }
-    root.append(divRow)
-    }
-    let possible = document.getElementById('possible');
-    for(let i = 0; i < 9 ; i++){
-        let divPoss = document.createElement('div');
-        divPoss.classList.add('possNumber');
-        divPoss.innerHTML = 0
-        possible.append(divPoss)
-    }
-    
-</script>
