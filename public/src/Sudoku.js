@@ -1,4 +1,4 @@
-class SudokuLogic {
+export default class SudokuLogic {
     constructor() {
         this.resetData();
     }
@@ -151,8 +151,4 @@ class SudokuLogic {
         }
         console.log(res);
     }
-}
-
-if (module) {
-    module.exports = SudokuLogic;
 }

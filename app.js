@@ -16,8 +16,6 @@ app.use(express.static(path.join(__dirname + '/public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
 
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const allow = ['register', 'login', 'auth/login', 'auth/register'];
@@ -64,7 +62,7 @@ app.set('view engine', 'hbs');
 
 //router
 
-app.use('/', require('./routes/pages'));
+app.use('/', require('./routes/index'));
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
