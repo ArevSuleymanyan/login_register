@@ -1,40 +1,28 @@
-#root {
-    margin-top: 20px;
-} 
+.column,
+.poss {
+    border: 1px grey solid;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    color: slategray;
+    font-weight: bold;
+}
 #possible {
+    display: flex;
+    margin-left: 33%;
     margin-bottom: 20px;
 }
 
-.column , .poss{
-    text-align: center;
-    display: inline-block;
-    border: 1px gray solid;
-    width: 40px;
-    height: 40px;
-    margin: 1px;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 3px;
-    background-color: white;
-    cursor: pointer;
+.row {
+    margin-left: 33%;
 }
-
-.start {
-    color: grey;
-    background-color: rgba(238, 238, 238, 0.753);
-    cursor: default;
-}
-
-.marked {
-    background-color: rgba(214, 211, 211, 0.972);
-}
-
-.selected {
-    font-size: 22px;
-    background-color: rgba(152, 154, 155, 0.637);
-}
-
-
 .jumbotron {
     text-align: center;
+}
+
+#btn {
+    margin-bottom: 10px;
+}
+.btn {
+    margin: 5px;
 }
