@@ -39,7 +39,7 @@ class SudokuLogic {
     getNumberByLevel(level) {
         let countOfNumbers;
         if (level === 3) {
-            countOfNumbers = 40;
+            countOfNumbers = 75;
             this.generateNumber();
         } else if (level === 2) {
             countOfNumbers = 30;

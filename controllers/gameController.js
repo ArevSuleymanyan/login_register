@@ -1,6 +1,7 @@
 const GameService = require('../services/GameService');
 const gameService = new GameService();
 
+
 exports.newgame = async (request, response) => {
     const id = request.userInfo.Id;
     const name = request.userInfo.name;
@@ -17,7 +18,6 @@ exports.newgame = async (request, response) => {
 
     response.render('game', {
         name,
-        game: game.sudoku
     })
 };
 
@@ -31,11 +31,9 @@ exports.play = async (request, response) => {
         let game = await gameService.getGameById(id);
         response.render('game', {
             name,
-            game: game.sudoku,
         });
     }
     response.render('game', {
         name,
-        game: game.sudoku,
     });
 };
