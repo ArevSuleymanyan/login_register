@@ -20,12 +20,12 @@ export default class SudokuLogic {
         this.getNumberByLevel(lvl);
     }
 
-    updateBoard(input, i, j) {
-        let index = j * 9 + i;
-        if (this.check(input, i, j)) {
-            this.board[index].number = input;
-        }
-    }
+    // updateBoard(input, i, j) {
+    //     let index = j * 9 + i;
+    //     if (this.check(input, i, j)) {
+    //         this.board[index].number = input;
+    //     }
+    // }
 
     checkEndGame() {
         for (let item of this.board) {
@@ -39,7 +39,7 @@ export default class SudokuLogic {
     getNumberByLevel(level) {
         let countOfNumbers;
         if (level === 3) {
-            countOfNumbers = 75;
+            countOfNumbers = 40;
             this.generateNumber();
         } else if (level === 2) {
             countOfNumbers = 30;
