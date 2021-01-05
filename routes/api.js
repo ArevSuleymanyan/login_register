@@ -11,6 +11,12 @@ router.get('/board', async(request, response) => {
     response.status(200).json(board);
 });
 
+router.post('/save', async (req, res) => {
+    const data = req.body
+    await gameService.updateGame(req.userInfo.Id, data);
+    return res.status(200)
+})
+
 module.exports = router;
 
 
