@@ -1,4 +1,4 @@
-export default class SudokuLogic {
+export default class  SudokuLogic {
     constructor() {
         this.resetData();
     }
@@ -20,12 +20,12 @@ export default class SudokuLogic {
         this.getNumberByLevel(lvl);
     }
 
-    // updateBoard(input, i, j) {
-    //     let index = j * 9 + i;
-    //     if (this.check(input, i, j)) {
-    //         this.board[index].number = input;
-    //     }
-    // }
+    updateBoard(input, i, j) {
+        let index = j * 9 + i;
+        if (this.check(input, i, j)) {
+            this.board[index].number = input;
+        }
+    }
 
     checkEndGame() {
         for (let item of this.board) {
@@ -62,7 +62,7 @@ export default class SudokuLogic {
         let init = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         let possible = [];
         for (let item of init) {
-            if (this.check(item, this.board[index].x, this.board[index].y)) {
+            if (this.check(item, index)) {
                 possible.push(item);
             }
         }
@@ -91,11 +91,11 @@ export default class SudokuLogic {
         }
     }
 
-    check(number, i, j) {
+    check(number, index) {
         if (
-            this.checkVertical(number, i) &&
-            this.checkHorizontal(number, j) &&
-            this.checkMatrix(number, i, j)
+            this.checkVertical(number, index) &&
+            this.checkHorizontal(number, index) &&
+            this.checkMatrix(number, index)
         ) {
             return true;
         } else {
@@ -103,25 +103,30 @@ export default class SudokuLogic {
         }
     }
 
-    checkVertical(number, i) {
-        for (let item of this.board) {
-            if (item.x === i && item.number === number) {
+    checkVertical(number, index) {
+        for (let i = 0; i < this.board.length; i++) {
+            if (i % 9 === index % 9 && this.board[i].number === number) {
                 return false;
             }
         }
         return true;
     }
 
-    checkHorizontal(number, j) {
-        for (let item of this.board) {
-            if (item.y === j && item.number === number) {
+    checkHorizontal(number, index) {
+        for (let i = 0; i < this.board.length; i++) {
+            if (
+                parseInt(i / 9) === parseInt(index / 9) &&
+                this.board[i].number === number
+            ) {
                 return false;
             }
         }
         return true;
     }
 
-    checkMatrix(number, i, j) {
+    checkMatrix(number,index) {
+        let i = index % 9;
+        let j = parseInt(index/9)
         let segmentX = parseInt(i / 3) * 3;
         let segmentY = parseInt(j / 3) * 3;
         for (let item of this.board) {
