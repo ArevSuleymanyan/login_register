@@ -6,11 +6,7 @@ export default class SudokuLogic {
     resetData() {
         this.board = [];
         for (let i = 0; i < 81; i++) {
-            let x = i % 9;
-            let y = parseInt(i / 9);
             this.board.push({
-                // x,
-                // y,
                 number: 0,
             });
         }
@@ -19,13 +15,6 @@ export default class SudokuLogic {
     runGame(lvl = 3) {
         this.getNumberByLevel(lvl);
     }
-
-    // updateBoard(input, i, j) {
-    //     let index = j * 9 + i;
-    //     if (this.check(input, i, j)) {
-    //         this.board[index].number = input;
-    //     }
-    // }
 
     checkEndGame() {
         for (let item of this.board) {
@@ -61,9 +50,9 @@ export default class SudokuLogic {
     possibleNumbers(index) {
         let init = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         let possible = [];
-        for (let item of init) {
-            if (this.check(item, index)) {
-                possible.push(item);
+        for (let num of init) {
+            if (this.check(num, index)) {
+                possible.push(num);
             }
         }
         return possible;
@@ -87,7 +76,6 @@ export default class SudokuLogic {
             }
             let rnd = Math.floor(Math.random() * possible.length);
             this.board[i].number = possible[rnd];
-            //this.print()
         }
     }
 
@@ -144,15 +132,4 @@ export default class SudokuLogic {
         return true;
     }
 
-    // print() {
-    //     let res = '';
-    //     for (let i = 0; i < 81; i++) {
-    //         const item = this.board[i];
-    //         if (i % 9 === 0) {
-    //             res += '\n';
-    //         }
-    //         res += item.number.toString();
-    //     }
-    //     console.log(res);
-    // }
 }
