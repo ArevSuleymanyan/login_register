@@ -14,6 +14,7 @@ import Sudoku from './Sudoku.js';
 
 const sudoku = new Sudoku();
 sudoku.runGame();
+console.log(sudoku.board)
 const board = [];
 const cell = {
     b_id: '',

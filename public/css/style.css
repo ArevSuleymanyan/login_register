@@ -16,13 +16,13 @@
 
 #possible {
     display: flex;
-    /* margin-left: 33%; */
+    margin-left: 33%;
     margin-bottom: 20px;
 }
 
-/* .row { */
-    /* margin-left: 33%; */
-/* } */
+.row {
+    margin-left: 33%;
+}
 .jumbotron {
     text-align: center;
 }

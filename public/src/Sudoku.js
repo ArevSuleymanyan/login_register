@@ -1,4 +1,4 @@
-export default class  SudokuLogic {
+export default class SudokuLogic {
     constructor() {
         this.resetData();
     }
@@ -9,8 +9,8 @@ export default class  SudokuLogic {
             let x = i % 9;
             let y = parseInt(i / 9);
             this.board.push({
-                x,
-                y,
+                // x,
+                // y,
                 number: 0,
             });
         }
@@ -20,12 +20,12 @@ export default class  SudokuLogic {
         this.getNumberByLevel(lvl);
     }
 
-    updateBoard(input, i, j) {
-        let index = j * 9 + i;
-        if (this.check(input, i, j)) {
-            this.board[index].number = input;
-        }
-    }
+    // updateBoard(input, i, j) {
+    //     let index = j * 9 + i;
+    //     if (this.check(input, i, j)) {
+    //         this.board[index].number = input;
+    //     }
+    // }
 
     checkEndGame() {
         for (let item of this.board) {
@@ -124,18 +124,17 @@ export default class  SudokuLogic {
         return true;
     }
 
-    checkMatrix(number,index) {
-        let i = index % 9;
-        let j = parseInt(index/9)
-        let segmentX = parseInt(i / 3) * 3;
-        let segmentY = parseInt(j / 3) * 3;
-        for (let item of this.board) {
+    checkMatrix(number, index) {
+        let segmentX = parseInt((index % 9) / 3) * 3;
+        let segmentY = parseInt(parseInt(index / 9) / 3) * 3;
+
+        for (let s = 0; s < this.board.length; s++) {
             for (let k = segmentX; k < segmentX + 3; k++) {
                 for (let p = segmentY; p < segmentY + 3; p++) {
                     if (
-                        item.x === k &&
-                        item.y === p &&
-                        item.number === number
+                        s % 9 === k &&
+                        parseInt(s / 9) === p &&
+                        this.board[s].number === number
                     ) {
                         return false;
                     }
@@ -145,15 +144,15 @@ export default class  SudokuLogic {
         return true;
     }
 
-    print() {
-        let res = '';
-        for (let i = 0; i < 81; i++) {
-            const item = this.board[i];
-            if (i % 9 === 0) {
-                res += '\n';
-            }
-            res += item.number.toString();
-        }
-        console.log(res);
-    }
+    // print() {
+    //     let res = '';
+    //     for (let i = 0; i < 81; i++) {
+    //         const item = this.board[i];
+    //         if (i % 9 === 0) {
+    //             res += '\n';
+    //         }
+    //         res += item.number.toString();
+    //     }
+    //     console.log(res);
+    // }
 }
