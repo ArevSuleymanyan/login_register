@@ -13,6 +13,9 @@
     background-color: rgb(236, 236, 236);
     cursor: default;
 }
+.num{
+    background-color: rgb(245, 236, 221);
+}
 
 #possible {
     display: flex;

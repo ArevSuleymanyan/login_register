@@ -15,9 +15,7 @@ router.post('/save', async (request, response) => {
     const data = request.body;
     
     await gameService.updateGame(request.userInfo.Id, data);
-    response.status(200).render('home', {
-        name : request.userInfo.name
-    })
+    response.redirect('/')
 })
 
 module.exports = router;

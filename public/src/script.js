@@ -7,11 +7,11 @@ function SudokuGame() {
 
     const sudoku = new Sudoku();
     const board = sudoku.board;
-
     function init(json) {
         let data = JSON.parse(json);
         for (let i = 0; i < data.length; i++) {
             board[i].number = data[i];
+            
         }
 
         createGameBoard(board);
@@ -101,6 +101,7 @@ function SudokuGame() {
         cell.num = document.getElementById(event.target.id).innerHTML;
         document.getElementById(event.target.id).classList.add('p');
     }
+
     function createButtons() {
         let btn = document.getElementById('btn');
         let add = document.createElement('button');
@@ -123,13 +124,19 @@ function SudokuGame() {
     }
 
     function addNumberHandler(event) {
+        console.log(board)
+        if (!cell.num) {
+            return;
+        } else {
+            board[cell.b_id].number = +cell.num;
+            console.log(document.getElementById(cell.b_id))
+            cell.num = '';
+            document.getElementById(cell.p_id).classList.remove('p');
+            document.getElementById(cell.b_id).classList.remove('p');
 
-        board[cell.b_id].number = +cell.num;
-        cell.num = '';
-        document.getElementById(cell.p_id).classList.remove('p');
-        document.getElementById(cell.b_id).classList.remove('p');
-        viewUpdate(board);
-        viewUpdatePossible(+cell.b_id);
+            viewUpdate(board);
+            viewUpdatePossible(+cell.b_id);
+        }
     }
 
     function deleteNumberHandler(event) {
