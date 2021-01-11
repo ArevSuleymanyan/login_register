@@ -7,6 +7,7 @@ class SudokuLogic {
         this.board = [];
         for (let i = 0; i < 81; i++) {
             this.board.push({
+                flag: false,
                 number: 0,
             });
         }
@@ -48,6 +49,7 @@ class SudokuLogic {
         while (countOfNumbers < 81) {
             let randomIndex = Math.floor(Math.random() * 81);
             if (this.board[randomIndex].number) {
+                this.board[randomIndex].flag = true
                 this.board[randomIndex].number = 0;
                 countOfNumbers++;
             }

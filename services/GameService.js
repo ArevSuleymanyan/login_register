@@ -6,11 +6,12 @@ class GameService {
     getNewGame() {
         const sudoku = new SudokuLogic();
         sudoku.runGame();
-        console.log('gameservice: ',sudoku.board)
+        console.log('gameservice: ', sudoku.board);
         const board = sudoku.board;
         const sudokuBoard = [];
         for (let i = 0; i < board.length; i++) {
-            sudokuBoard.push(board[i].number);
+            // sudokuBoard.push(board[i].number);
+            sudokuBoard.push(board[i]);
         }
         return sudokuBoard;
     }

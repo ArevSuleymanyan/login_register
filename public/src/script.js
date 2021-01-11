@@ -10,10 +10,9 @@ function SudokuGame() {
     function init(json) {
         let data = JSON.parse(json);
         for (let i = 0; i < data.length; i++) {
-            board[i].number = data[i];
-            
+            board[i].number = data[i].number;
+            board[i].flag = data[i].flag;
         }
-
         createGameBoard(board);
         viewUpdate(board);
         createPossibleBoard();
@@ -37,7 +36,7 @@ function SudokuGame() {
                 column.classList.add('column');
                 column.setAttribute('id', n);
                 column.setAttribute('type', 'text');
-                if (board[n].number) {
+                if (!board[n].flag) {
                     column.classList.add('start');
                 } else {
                     column.addEventListener('click', (event) =>
@@ -124,13 +123,11 @@ function SudokuGame() {
     }
 
     function addNumberHandler(event) {
-        console.log(board)
         if (!cell.num) {
             return;
         } else {
             board[cell.b_id].number = +cell.num;
-            console.log(document.getElementById(cell.b_id))
-            cell.num = '';
+            cell.num = 0;
             document.getElementById(cell.p_id).classList.remove('p');
             document.getElementById(cell.b_id).classList.remove('p');
 
@@ -141,7 +138,6 @@ function SudokuGame() {
 
     function deleteNumberHandler(event) {
         sudoku.board[cell.b_id].number = 0;
-        board[cell.b_id] = 0;
         viewUpdate(board);
         viewUpdatePossible(+cell.b_id);
         document.getElementById(cell.p_id).classList.remove('p');
@@ -151,7 +147,8 @@ function SudokuGame() {
     function saveGame() {
         const dataBoard = [];
         for (let i = 0; i < board.length; i++) {
-            dataBoard.push(board[i].number);
+            dataBoard.push(board[i]);
+
         }
         const options = {
             method: 'POST',

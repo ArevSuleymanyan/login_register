@@ -8,6 +8,7 @@ export default class SudokuLogic {
         for (let i = 0; i < 81; i++) {
             this.board.push({
                 number: 0,
+                flag: false,
             });
         }
     }
@@ -42,6 +43,7 @@ export default class SudokuLogic {
             let randomIndex = Math.floor(Math.random() * 81);
             if (this.board[randomIndex].number) {
                 this.board[randomIndex].number = 0;
+                this.board[randomIndex].flag = true
                 countOfNumbers++;
             }
         }

@@ -28,7 +28,7 @@ exports.play = async (request, response) => {
     if (!game) {
         const board = gameService.getNewGame();
         gameService.insertNewGame(id, board);
-        let game = await gameService.getGameById(id);
+        // let game = await gameService.getGameById(id);
         response.render('game', {
             name,
         });
