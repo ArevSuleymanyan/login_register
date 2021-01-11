@@ -70,7 +70,6 @@ function SudokuGame() {
 
     function viewUpdatePossible(id) {
         let possibleNumbers = sudoku.possibleNumbers(id);
-        // let num = possibleNumbers(id)
         let possibleBoard = document.getElementsByClassName('poss');
         for (const item of possibleBoard) {
             item.innerHTML = '';
@@ -148,7 +147,6 @@ function SudokuGame() {
         const dataBoard = [];
         for (let i = 0; i < board.length; i++) {
             dataBoard.push(board[i]);
-
         }
         const options = {
             method: 'POST',
@@ -157,7 +155,12 @@ function SudokuGame() {
             },
             body: JSON.stringify(dataBoard),
         };
-        fetch('http://localhost:3000/api/save', options);
+        fetch('http://localhost:3000/api/save', options)
+        .then((res) => {
+            if(res.redirected){
+                document.location.href = 'http://localhost:3000'
+            }
+        });
     }
 }
 SudokuGame();

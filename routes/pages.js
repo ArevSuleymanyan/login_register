@@ -5,6 +5,7 @@ function setup(router) {
     const authRoute = require('../routes/auth');
 
     router.get('/', (request, response) => {
+        console.log('redirected');
         if (request.userInfo) {
             let userName = request.userInfo.name;
             userName = userName.charAt(0).toUpperCase() + userName.slice(1);
