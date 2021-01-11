@@ -6,11 +6,7 @@ class SudokuLogic {
     resetData() {
         this.board = [];
         for (let i = 0; i < 81; i++) {
-            let x = i % 9;
-            let y = parseInt(i / 9);
             this.board.push({
-                x,
-                y,
                 number: 0,
             });
         }
