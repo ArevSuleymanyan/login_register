@@ -15,13 +15,13 @@ class UserService {
     }
     getEmail(email) {
         const sql = 'SELECT email FROM users WHERE email=?';
-        return queryAsync(sql, email)
+        return queryAsync(sql, [email])
             .then((result) => result)
             .catch((error) => console.log(error));
     }
     getUserByEmail(email) {
         const sql = 'SELECT * FROM users WHERE  email = ?';
-        return queryAsync(sql, email)
+        return queryAsync(sql, [email])
             .then((result) => result)
             .catch((error) => console.log(error));
     }

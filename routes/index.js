@@ -6,5 +6,4 @@ const router = express.Router();
 
 router.use('/api', apiRoute);
 setupPages(router);
-
 module.exports = router;
