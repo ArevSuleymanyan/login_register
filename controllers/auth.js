@@ -61,6 +61,7 @@ exports.login = async (request, response) => {
             httpOnly: true,
         };
         response.cookie('jwt', token, cookieOptions);
+
         return response.status(200).redirect('/');
     }
 };
